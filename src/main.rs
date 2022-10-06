@@ -1,4 +1,4 @@
-use std::{fmt::Display, num, process::exit};
+use std::{fmt::Display, process::exit};
 
 const OUTPUT_FILE: &str = "rom.hex";
 
@@ -180,6 +180,8 @@ fn parse_opcode(raw_value: &str) -> Result<(u8, Option<u8>), OpcodeError> {
 
 fn main() {
     let input = "\
+ldi r4, 0xC4
+ldi r7, 0x3F
 and r4, r7
 addi r3, 0x34
 j 0xD2
@@ -322,7 +324,7 @@ j 0xD2
             format!(":{}{:02x}", line, checksum)
         })
         .collect();
-    output.push(":00000001F".to_string());
+    output.push(":00000001FF".to_string());
 
     let output = output.join("\n");
 
